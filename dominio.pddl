@@ -9,7 +9,7 @@
         (esta-persona ?p - persona ?l - location)
         (persona-tiene-caja ?p -persona ?c -caja)
         (esta-herida ?p - persona)
-      (libre ?b - brazo)
+        (libre ?b - brazo)
         (agarra ?d - dron ?c - caja ?b - brazo)
         (consigue ?p - persona ?con - contenido)
         (almacena ?c - caja ?con - contenido)
