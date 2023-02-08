@@ -11,8 +11,8 @@
     (:init
         (esta-dron dron1 deposito)
         (esta-caja c1 deposito)
-        (esta-persona p1 l1)
         (almacena c1 medicina)
+        (esta-persona p1 l1)
         (libre brazo1)
         (libre brazo2)
     )
