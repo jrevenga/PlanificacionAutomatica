@@ -31,7 +31,6 @@
            (almacena ?c ?con)
            (libre ?b))
        :effect (and
-           (agarra ?d ?c ?b)
            (not (esta-caja ?c ?l))
            (not (libre ?b)))
     )
@@ -40,12 +39,15 @@
        :parameters  (?d - dron ?b - brazo ?c - caja ?l - location ?p - persona ?con - contenido)
        :precondition (and
            (esta-dron ?d ?l)
-           (agarra ?d ?c ?b)
            (esta-persona ?p ?l)
-           (almacena ?c ?con))
+           (almacena ?c ?con)
+           (not (libre ?b)))
+               
        :effect (and
            (consigue ?p ?con)
-           (not (agarra ?d ?c ?b))
-           (libre ?b))
+           (libre ?b)
+           (esta-caja ?c ?l)
+           )
+           
     )
 )

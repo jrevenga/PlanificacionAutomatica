@@ -2,7 +2,7 @@
     (:objects
         dron1 - dron
         brazo1 brazo2 - brazo
-        deposito l1 l2 - loc
+        deposito l1 l2 - location
         p1 p2 - persona
         c1 c2 c3 - caja
         medicina comida - contenido
