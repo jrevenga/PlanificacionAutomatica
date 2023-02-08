@@ -11,10 +11,10 @@
     (:init
         (esta-dron dron1 deposito)
         (esta-caja c1 deposito)
-        (almacena c1 medicina)
         (esta-persona p1 l1)
+        (almacena c1 medicina)
         (libre brazo1)
-        (libre brazo2)
+        (libre brazo2)  
     )
 
     (:goal 
