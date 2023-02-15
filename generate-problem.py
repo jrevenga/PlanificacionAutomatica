@@ -22,7 +22,7 @@ import sys
 # Crates will have different contents, such as food and medicine.
 # You can change this to generate other contents if you want.
 
-content_types = ["food", "medicine"]
+content_types = ["comida", "medicina"]
 
 
 ########################################################################################
@@ -301,7 +301,6 @@ def main():
             f.write("\t(esta-persona "+ p + " " + random.choice(location[1:])+")\n")
         for c in carrier:
             f.write("\t(libre "+ c + ")\n")
-            f.write("\t(libre " + c + ")\n")
 
         f.write(")\n")
 
@@ -314,7 +313,7 @@ def main():
         for x in drone:
             f.write("\n")
             # TODO: Write a goal that the drone x is at the depot
-            f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
+            #f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):
