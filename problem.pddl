@@ -2,7 +2,7 @@
     (:objects
         dron1 - dron
         brazo1 brazo2 - brazo
-        deposito l1 - loc
+        deposito l1 - location
         p1 - persona
         c1 - caja
         medicina comida - contenido
@@ -15,6 +15,7 @@
         (almacena c1 medicina)
         (libre brazo1)
         (libre brazo2)
+        (caja-libre c1)
     )
 
     (:goal 
