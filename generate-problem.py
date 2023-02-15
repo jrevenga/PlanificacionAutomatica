@@ -314,7 +314,7 @@ def main():
         for x in drone:
             f.write("\n")
             # TODO: Write a goal that the drone x is at the depot
-            #f.write("\t(esta-dron " + x + location[0] + ")\n")
+            f.write("\t" + "esta-dron " + x + location[0] + "\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):
@@ -323,7 +323,7 @@ def main():
                     content_name = content_types[y]
                     # TODO: write a goal that the person needs a crate
                     # with this specific content
-                    f.write("\t(consigue " + x + " " + y + ")\n")
+                    f.write("\t" + "consigue " + x + " " + y + "\n")
 
         f.write("\t))\n")
         f.write(")\n")
