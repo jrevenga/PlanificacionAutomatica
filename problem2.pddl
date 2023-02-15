@@ -20,6 +20,9 @@
         (almacena c3 medicina)
         (libre brazo1)
         (libre brazo2)
+        (caja-libre c1)
+        (caja-libre c2)
+        (caja-libre c3)
     )
     (:goal (and
         (consigue p1 medicina)
