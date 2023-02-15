@@ -219,17 +219,17 @@ def main():
     carrier = []
     location = []
 
-    location.append("depot")
+    location.append("deposito")
     for x in range(options.locations):
-        location.append("loc" + str(x + 1))
+        location.append("l" + str(x + 1))
     for x in range(options.drones):
-        drone.append("drone" + str(x + 1))
+        drone.append("dron" + str(x + 1))
     for x in range(options.carriers):
-        carrier.append("carrier" + str(x + 1))
+        carrier.append("brazo" + str(x + 1))
     for x in range(options.persons):
-        person.append("person" + str(x + 1))
+        person.append("p" + str(x + 1))
     for x in range(options.crates):
-        crate.append("crate" + str(x + 1))
+        crate.append("c" + str(x + 1))
     
     # Determine the set of crates for each content.
     # If content_types[0] is "food",
@@ -290,6 +290,18 @@ def main():
         f.write("(:init\n")
 
         # TODO: Initialize all facts here!
+
+        for d in drone:
+            f.write("\t(esta-dron "+ d + " deposito)\n")
+        for b in crate:
+            f.write("\t(esta-caja "+ b + " deposito)\n")
+            f.write("\t(caja-libre "+ b + ")\n")
+            f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
+        for p in person:
+            f.write("\t(esta-persona "+ p + " " + random.choice(location[1:])+")\n")
+        for c in carrier:
+            f.write("\t(libre "+ c + ")\n")
+            f.write("\t(libre " + c + ")\n")
 
         f.write(")\n")
 
