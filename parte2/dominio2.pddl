@@ -1,5 +1,5 @@
 (define (domain dron)
-    (:requirements :strips :typing)
+    (:requirements :strips :typing :action-costs)
     (:types
      dron persona location contenido caja transportador num
     )
@@ -18,7 +18,12 @@
         (trans-carga ?tr - transportador ?n - num)
     )
 
-    (:action volar-trans
+    (:functions
+        (total-cost)
+        (fly-cost ?desde - location ?hasta - location)
+    )
+    
+    (:action volar
         :parameters (?d - dron ?desde ?hasta - location ?tr - transportador)
         :precondition (and
             (libre-dron ?d)
@@ -30,23 +35,26 @@
             (not (esta-dron ?d ?desde))
             (esta-trans ?tr ?hasta)
             (esta-dron ?d ?hasta)
-        ))
+            (increase (total-cost) (fly-cost ?desde ?hasta))
+            )    
+    )
 
     (:action meter-caja-trans
         :parameters (?d - dron ?c - caja ?tr - transportador ?l - location ?n1 ?n2 - num)
         :precondition (and
             (esta-dron ?d ?l)
             (esta-trans ?tr ?l)
-            (esta-caja ?c ?l)
             (lleva-dron ?d ?c)
             (trans-carga ?tr ?n1)
             (siguiente ?n1 ?n2))
         :effect (and
             (libre-dron ?d)
-            (not (lleva-dron ?d ?c))
             (trans-lleva ?tr ?c)
+            (not (lleva-dron ?d ?c))
             (trans-carga ?tr ?n2)
-            (not (trans-carga ?tr ?n1)))
+            (not (trans-carga ?tr ?n1))
+            (increase (total-cost) 1)
+            )
     )
 
     (:action sacar-caja-contenedor
@@ -63,7 +71,9 @@
             (lleva-dron ?d ?c)
             (not (trans-lleva ?tr ?c))
             (trans-carga ?tr ?n1)
-            (not (trans-carga ?tr ?n2)))
+            (not (trans-carga ?tr ?n2))
+            (increase (total-cost) 1)
+            )
     )
 
     (:action coger
@@ -76,7 +86,9 @@
        :effect (and
            (lleva-dron ?d ?c)
            (not (esta-caja ?c ?l))
-           (not (libre-dron ?d)))
+           (not (libre-dron ?d))
+           (increase (total-cost) 1)
+           )
     )
 
     (:action soltar
@@ -84,13 +96,13 @@
        :precondition (and
            (esta-dron ?d ?l)
            (esta-persona ?p ?l)
-           (almacena ?c ?con)
            (lleva-dron ?d ?c)
            )
        :effect (and
            (consigue ?p ?con)
            (libre-dron ?d)
            (not (lleva-dron ?d ?c))
+           (increase (total-cost) 1)
            )
     )
 )
