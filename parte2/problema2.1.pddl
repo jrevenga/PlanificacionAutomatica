@@ -1,7 +1,7 @@
-(define (problem problema2) (:domain dron)
+(define (problem problema) (:domain dron)
     (:objects
         dron1 - dron
-        contenedor1 - contenedor
+        trans1 - transportador
         deposito l1 l2 l3 l4 - location
         p1 p2 p3 p4 p5 - persona
         c1 c2 c3 c4 c5 c6 - caja
@@ -11,6 +11,7 @@
 
     (:init
         (esta-dron dron1 deposito)
+        (esta-trans trans1 deposito)
         (libre-dron dron1)
         (esta-caja c1 deposito)
         (esta-caja c2 deposito)
@@ -29,19 +30,13 @@
         (almacena c4 agua)
         (almacena c5 vendas)
         (almacena c6 agua)
-        (caja-libre c1)
-        (caja-libre c2)
-        (caja-libre c3)
-        (caja-libre c4)
-        (caja-libre c5)
-        (caja-libre c6)
         (siguiente n0 n1)
         (siguiente n1 n2)
         (siguiente n2 n3)
         (siguiente n3 n4)
         (siguiente n4 n5)
         (siguiente n5 n6)
-        (contenedor-n-cajas contenedor1 n0)
+        (trans-carga trans1 n0)
     )
     (:goal (and
         (consigue p1 medicina)
