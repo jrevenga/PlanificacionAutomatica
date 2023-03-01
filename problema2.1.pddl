@@ -1,7 +1,6 @@
 (define (problem problema2) (:domain dron)
     (:objects
         dron1 - dron
-        brazo1 brazo2 - brazo
         contenedor1 - contenedor
         deposito l1 l2 l3 l4 - location
         p1 p2 p3 p4 p5 - persona
