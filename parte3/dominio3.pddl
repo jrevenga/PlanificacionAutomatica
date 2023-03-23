@@ -42,7 +42,7 @@
         )
         :effect (and 
             (at start (and 
-                (not(carrier-at ?r ?from)); el carrier deja de estar en la localización
+                (not(carrier-at ?r ?from))
                 (not(drone-at ?d ?from))
                 (not(carrier-drone-free ?r))
                 (not (drone-free ?d))

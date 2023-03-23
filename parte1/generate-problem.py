@@ -225,7 +225,7 @@ def main():
     for x in range(options.drones):
         drone.append("dron" + str(x + 1))
     for x in range(options.carriers):
-        carrier.append("brazo" + str(x + 1))
+        carrier.append("contenedor" + str(x + 1))
     for x in range(options.persons):
         person.append("p" + str(x + 1))
     for x in range(options.crates):
@@ -280,7 +280,7 @@ def main():
             f.write("\t" + x + " - persona\n")
 
         for x in carrier:
-            f.write("\t" + x + " - brazo\n")
+            f.write("\t" + x + " - contenedor\n")
 
         f.write(")\n")
 
@@ -299,8 +299,6 @@ def main():
             f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
         for p in person:
             f.write("\t(esta-persona "+ p + " " + random.choice(location[1:])+")\n")
-        for c in carrier:
-            f.write("\t(libre "+ c + ")\n")
 
         f.write(")\n")
 
@@ -313,7 +311,7 @@ def main():
         for x in drone:
             f.write("\n")
             # TODO: Write a goal that the drone x is at the depot
-            #f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
+            f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):

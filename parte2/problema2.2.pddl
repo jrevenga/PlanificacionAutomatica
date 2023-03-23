@@ -37,6 +37,13 @@
         (siguiente n2 n3)
         (siguiente n3 n4)
         (trans-carga trans1 n0)
+        (= (total-cost) 0)
+        (= (fly-cost l1 l2) 2)
+        (= (fly-cost l1 l3) 5)
+        (= (fly-cost l2 l1) 1)
+        (= (fly-cost l2 l3) 4)
+        (= (fly-cost l3 l1) 3)
+        (= (fly-cost l3 l2) 3)
     )
     (:goal (and
         (consigue p1 medicina)
@@ -46,4 +53,6 @@
         (consigue p4 vendas)
         )
     )
+
+    (:metric minimize (total-cost))
 )

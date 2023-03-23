@@ -12,7 +12,6 @@
     )
 
     (:init
-        ;todo: put the initial state's facts and numeric values here
 
         (drone-at drone1 warehouse)
         (drone-at drone2 loc1)
