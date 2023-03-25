@@ -203,7 +203,7 @@ def main():
         sys.exit(1)
 
     print("Drones\t\t", options.drones)
-    print("Brazos\t", options.carriers)
+    print("Carriers\t", options.carriers)
     print("Locations\t", options.locations)
     print("Persons\t\t", options.persons)
     print("Crates\t\t", options.crates)
@@ -249,9 +249,11 @@ def main():
     need = setup_person_needs(options, crates_with_contents)
 
     # Define a problem name
-    problem_name = "drone_problem_d" + str(options.drones) + "_r" + str(options.carriers) + \
+    problem_name1 = "drone_problem_d" + str(options.drones) + "_r" + str(options.carriers) + \
                    "_l" + str(options.locations) + "_p" + str(options.persons) + "_c" + str(options.crates) + \
                    "_g" + str(options.goals) + "_ct" + str(len(content_types))
+    
+    problem_name = "problema_" + str(options.locations)
 
     # Open output file
     with open(problem_name + ".pddl", 'w') as f:
@@ -313,7 +315,7 @@ def main():
         for x in drone:
             f.write("\n")
             # TODO: Write a goal that the drone x is at the depot
-            f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
+            #f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):
