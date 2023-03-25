@@ -203,7 +203,7 @@ def main():
         sys.exit(1)
 
     print("Drones\t\t", options.drones)
-    print("Carriers\t", options.carriers)
+    print("Brazos\t", options.carriers)
     print("Locations\t", options.locations)
     print("Persons\t\t", options.persons)
     print("Crates\t\t", options.crates)
@@ -225,7 +225,7 @@ def main():
     for x in range(options.drones):
         drone.append("dron" + str(x + 1))
     for x in range(options.carriers):
-        carrier.append("contenedor" + str(x + 1))
+        carrier.append("brazo" + str(x + 1))
     for x in range(options.persons):
         person.append("p" + str(x + 1))
     for x in range(options.crates):
@@ -280,7 +280,7 @@ def main():
             f.write("\t" + x + " - persona\n")
 
         for x in carrier:
-            f.write("\t" + x + " - contenedor\n")
+            f.write("\t" + x + " - brazo\n")
 
         f.write(")\n")
 
@@ -299,6 +299,8 @@ def main():
             f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
         for p in person:
             f.write("\t(esta-persona "+ p + " " + random.choice(location[1:])+")\n")
+        for c in carrier:
+            f.write("\t(libre "+ c + ")\n")
 
         f.write(")\n")
 
