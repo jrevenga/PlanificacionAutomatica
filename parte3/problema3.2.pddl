@@ -1,12 +1,12 @@
 (define (problem problema) (:domain dron)
     (:objects
-        dron1 - dron
+        dron1 dron2 - dron
         deposito l1 l2 l3 - location
         p1 p2 p3 p4 - persona
         c1 c2 c3 c4 c5 - caja
         medicina comida agua vendas - contenido
         n0 n1 n2 n3 n4 - num
-        trans1 - transportador
+        trans1 trans2- transportador
     )
 
     (:init
@@ -32,7 +32,9 @@
         (siguiente n2 n3)
         (siguiente n3 n4)
         (trans-carga trans1 n0)
-        (= (total-cost) 0)
+        (= (fly-cost deposito l1) 2)
+     	(= (fly-cost deposito l2) 2)
+     	(= (fly-cost deposito l3) 2)
         (= (fly-cost l1 l2) 2)
         (= (fly-cost l1 l3) 5)
         (= (fly-cost l2 l1) 1)
