@@ -309,18 +309,14 @@ def main():
         for h in human:
             f.write("\t(esta-persona "+ h + " " + random.choice(location[1:])+")\n")
 
-        f.write('\t(siguiente n0 n1)\n')
-        f.write('\t(siguiente n1 n2)\n')
-        f.write('\t(siguiente n2 n3)\n')
-        f.write('\t(siguiente n3 n4)\n')
+        f.write("\t(siguiente n0 n1)(siguiente n1 n2)(siguiente n2 n3)(siguiente n3 n4)(siguiente n4 n5)\n")
 
         for i in range(len(location)):
             for j in range(len(location)):
                 if (i == j):
                     f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") 0)\n")
                 else:
-                    rand = random.randint(1, 50)
-                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + str(rand) + ")\n")
+                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + flight_cost(location_coords, i, j) + ")\n")
 
         f.write(")\n\n")
 

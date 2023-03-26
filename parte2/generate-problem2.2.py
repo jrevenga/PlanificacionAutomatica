@@ -321,8 +321,7 @@ def main():
                 if (i == j):
                     f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") 0)\n")
                 else:
-                    rand = random.randint(1, 50)
-                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + str(rand) + ")\n")
+                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + flight_cost(location_coords, i, j) + ")\n")
 
         f.write(")\n\n")
 
