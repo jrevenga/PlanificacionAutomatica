@@ -297,13 +297,12 @@ def main():
             f.write("\t(esta-dron "+ d + " deposito)\n")
         for b in crate:
             f.write("\t(esta-caja "+ b + " deposito)\n")
-            f.write("\t(caja-libre "+ b + ")\n")
-            f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
         for p in person:
             f.write("\t(esta-persona "+ p + " " + random.choice(location[1:])+")\n")
+        for b in crate:
+            f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
         for c in carrier:
             f.write("\t(libre "+ c + ")\n")
-
         f.write(")\n")
 
         ######################################################################
@@ -313,7 +312,7 @@ def main():
 
         # All Drones should end up at the depot
         for x in drone:
-            f.write("\n")
+            f.write("\t(esta-dron "+ d + " deposito)\n")
             # TODO: Write a goal that the drone x is at the depot
             #f.write("\t(esta-dron "+ x + " " + location[0]+")\n")
 
@@ -324,7 +323,7 @@ def main():
                     content_name = content_types[y]
                     # TODO: write a goal that the person needs a crate
                     # with this specific content
-                    f.write("\t(consigue "+ person[x] + " " + content_types[y]+")\n")
+                    f.write("\t(consigue "+ person_name + " " + content_name+")\n")
 
         f.write("\t))\n")
         f.write(")\n")

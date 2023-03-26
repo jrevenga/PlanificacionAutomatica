@@ -20,13 +20,10 @@
 (:init
 	(esta-dron dron1 deposito)
 	(esta-caja c1 deposito)
-	(caja-libre c1)
 	(almacena c1 medicine)
 	(esta-caja c2 deposito)
-	(caja-libre c2)
 	(almacena c2 food)
 	(esta-caja c3 deposito)
-	(caja-libre c3)
 	(almacena c3 medicine)
 	(esta-persona p1 l2)
 	(esta-persona p2 l3)

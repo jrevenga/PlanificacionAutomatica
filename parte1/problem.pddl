@@ -15,7 +15,6 @@
         (almacena c1 medicina)
         (libre brazo1)
         (libre brazo2)
-        (caja-libre c1)
     )
 
     (:goal 

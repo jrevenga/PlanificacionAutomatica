@@ -13,7 +13,6 @@
         (lleva ?d - dron ?c - caja ?b - brazo)
         (consigue ?p - persona ?con - contenido)
         (almacena ?c - caja ?con - contenido)
-        (caja-libre ?c  - caja)
     )
 
     (:action volar
@@ -30,7 +29,6 @@
            (esta-dron ?d ?l)
            (esta-caja ?c ?l)
            (almacena ?c ?con)
-           (caja-libre ?c)
            (libre ?b))
        :effect (and
            (lleva ?d ?c ?b)
@@ -43,16 +41,12 @@
        :precondition (and
            (esta-dron ?d ?l)
            (esta-persona ?p ?l)
-           (almacena ?c ?con)
            (lleva ?d ?c ?b)
            )
-               
        :effect (and
            (consigue ?p ?con)
            (libre ?b)
-           (esta-caja ?c ?l)
            (not (lleva ?d ?c ?b))
-           (not (caja-libre ?c))
            )     
     )
 )
