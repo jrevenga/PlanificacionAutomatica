@@ -314,12 +314,13 @@ def main():
         f.write('\t(siguiente n2 n3)\n')
         f.write('\t(siguiente n3 n4)\n')
 
-        for i in location:
-            for j in location:
-                if i == j:
-                    f.write("\t(= (fly-cost " + i + " " + j + ") 0)\n")
+        for i in range(len(location)):
+            for j in range(len(location)):
+                if (i == j):
+                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") 0)\n")
                 else:
-                    f.write("\t(= (fly-cost " + i + " " + j + ") " + flight_cost(location_coords, i, j) + ")\n")
+                    rand = random.randint(1, 50)
+                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + str(rand) + ")\n")
 
         f.write(")\n\n")
 
