@@ -253,7 +253,7 @@ def main():
                    "_l" + str(options.locations) + "_p" + str(options.persons) + "_c" + str(options.crates) + \
                    "_g" + str(options.goals) + "_ct" + str(len(content_types))
     
-    problem_name = "problema_" + str(options.locations)
+    problem_name = "problema2_" + str(options.locations)
 
     # Open output file
     with open(problem_name + ".pddl", 'w') as f:

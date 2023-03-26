@@ -13,7 +13,6 @@
         (esta-dron dron1 deposito)
         (esta-trans trans1 deposito)
         (libre-dron dron1)
-        (libre-caja c1)
         (libre-caja c2)
         (libre-caja c3)
         (libre-caja c4)

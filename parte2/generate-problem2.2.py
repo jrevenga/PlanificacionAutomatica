@@ -297,40 +297,31 @@ def main():
         f.write("(:init\n")
 
         # TODO: Initialize all facts here!
-        for x in carrier:
-            f.write("\t(esta-trans " + x + " " + location[0] + ")\n")
-            f.write("\t(trans-carga " + x + " " + 'n0' + ")\n")
-
-        for x in drone:
-            f.write("\t(esta-dron " + x + " " + location[0] + ")\n")
-            f.write("\t(libre-dron " + x + ")\n")
-
-        for x in box:
-            f.write("\t(esta-caja " + x + " " + location[0] + ")\n")
-            f.write("\t(libre-caja " + x + ")\n")
-        
-        for i in range(len(content_types)):
-            for x in boxes_with_contents[i]:
-                f.write("\t(almacena " + x + " " + content_types[i] + ")\n")
-
-        for x in human:
-            rand = random.randint(1, len(location) - 1)
-            f.write("\t(esta-persona " + x + " " + location[rand] + ")\n")
+        for d in drone:
+            f.write("\t(esta-dron " + d + " " + location[0] + ")\n")
+            f.write("\t(libre-dron " + d + ")\n")
+        for b in box:
+            f.write("\t(esta-caja " + b + " " + location[0] + ")\n")
+            f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
+        for c in carrier:
+            f.write("\t(esta-trans " + c + " " + location[0] + ")\n")
+            f.write("\t(trans-carga " + c + " n0)\n")
+        for h in human:
+            f.write("\t(esta-persona "+ h + " " + random.choice(location[1:])+")\n")
 
         f.write('\t(siguiente n0 n1)\n')
         f.write('\t(siguiente n1 n2)\n')
         f.write('\t(siguiente n2 n3)\n')
         f.write('\t(siguiente n3 n4)\n')
 
-        for i in range(len(location)):
-            for j in range(len(location)):
-                if (i == j):
-                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") 0)\n")
-                else:
-                    rand = random.randint(1, 50)
-                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + str(rand) + ")\n")
+        f.write("\t(= (total-cost) 0)\n")
 
-        f.write('\t(= (total-cost) 0)\n')
+        for i in location:
+            for j in location:
+                if i == j:
+                    f.write("\t(= (fly-cost " + i + " " + j + ") 0)\n")
+                else:
+                    f.write("\t(= (fly-cost " + i + " " + j + ") " + flight_cost(location_coords, i, j) + ")\n")
 
         f.write(")\n\n")
 
@@ -343,10 +334,6 @@ def main():
         for x in drone:
             # TODO: Write a goal that the drone x is at the warehouse
             f.write("\t(esta-dron " + x + " " + location[0] + ")\n")
-        
-        for x in carrier:
-            # TODO: Write a goal that the drone x is at the warehouse
-            f.write("\t(esta-trans " + x + " " + location[0] + ")\n")
 
         for x in range(options.humans):
             for y in range(len(content_types)):
@@ -358,7 +345,9 @@ def main():
                     f.write("\t(consigue " + human_name + " " + content_name + ")\n")
 
         f.write("\t))\n")
-        f.write("(:metric minimize (total-cost))\n")
+
+        f.write("\t(:metric minimize (total-cost))\n")
+        
         f.write(")\n")
 
 

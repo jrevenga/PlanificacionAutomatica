@@ -11,7 +11,6 @@
         (esta-trans ?tr - transportador ?l - location)
         (libre-dron ?d - dron)
         (lleva-dron ?d - dron ?c - caja)
-        (libre-caja ?c - caja)
         (consigue ?p - persona ?con - contenido)
         (almacena ?c - caja ?con - contenido)
         (trans-lleva ?tr - transportador ?c - caja)
@@ -39,17 +38,6 @@
             (increase (total-cost) (fly-cost ?desde ?hasta))
             )    
     )
-
-    (:action mover-dron
-        :parameters (?d - dron ?desde ?hasta - location)
-        :precondition (and
-        (esta-dron ?d ?desde) )
-        :effect (and
-        (esta-dron ?d ?hasta)
-        (not (esta-dron ?d ?desde))
-        (increase (total-cost) (fly-cost ?desde ?hasta)))
-    )
-    
 
     (:action meter-caja-trans
         :parameters (?d - dron ?c - caja ?tr - transportador ?l - location ?n1 ?n2 - num)
@@ -94,8 +82,7 @@
            (esta-dron ?d ?l)
            (esta-caja ?c ?l)
            (almacena ?c ?con)
-           (libre-dron ?d)
-           (libre-caja ?c))
+           (libre-dron ?d))
        :effect (and
            (lleva-dron ?d ?c)
            (not (esta-caja ?c ?l))
@@ -115,7 +102,6 @@
            (consigue ?p ?con)
            (libre-dron ?d)
            (not (lleva-dron ?d ?c))
-           (not (libre-caja ?c))
            (increase (total-cost) 1)
            )
     )
