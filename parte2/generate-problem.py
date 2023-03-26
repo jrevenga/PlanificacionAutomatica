@@ -283,7 +283,7 @@ def main():
 
         for x in carrier:
             f.write("\t" + x + " - transportador\n")
-
+        
         f.write("\tn0 n1 n2 n3 n4 - num\n")
 
         f.write(")\n")
@@ -307,7 +307,7 @@ def main():
         for c in carrier:
             f.write("\t(esta-trans "+ c + " deposito)\n")
             f.write("\t(trans-carga " + c + " n0)\n")
-
+        
         f.write("\t(siguiente n0 n1)(siguiente n1 n2)(siguiente n2 n3)(siguiente n3 n4)\n")
 
         f.write(")\n")

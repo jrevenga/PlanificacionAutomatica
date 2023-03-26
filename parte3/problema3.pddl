@@ -50,6 +50,4 @@
         (consigue p4 vendas)
         )
     )
-
-    (:metric minimize (total-cost))
 )
