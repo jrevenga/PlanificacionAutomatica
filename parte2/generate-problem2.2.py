@@ -321,7 +321,7 @@ def main():
                 if (i == j):
                     f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") 0)\n")
                 else:
-                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + flight_cost(location_coords, i, j) + ")\n")
+                    f.write("\t(= (fly-cost " + location[i] + " " + location[j] + ") " + str(flight_cost(location_coords, i, j)) + ")\n")
 
         f.write(")\n\n")
 
