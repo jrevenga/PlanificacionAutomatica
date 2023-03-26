@@ -51,7 +51,7 @@
             )
     )
 
-    (:action sacar-caja-contenedor
+    (:action sacar-caja-trans
         :parameters (?d - dron ?c - caja ?tr - transportador ?l - location ?n1 ?n2 - num)
         :precondition (and
             (esta-dron ?d ?l)
