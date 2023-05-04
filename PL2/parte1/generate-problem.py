@@ -264,29 +264,29 @@ def main():
 
         ######################################################################
         # Write objects
-
+        f.write("\t")
         for x in drone:
-            f.write("\t(DRON " + x + ") ")
+            f.write("(DRON " + x + ") ")
         f.write("\n")    
-
+        f.write("\t")
         for x in location:
-            f.write("\t(LOCATION " + x + ") ")
+            f.write("(LOCATION " + x + ") ")
         f.write("\n")
-
+        f.write("\t")
         for x in crate:
-            f.write("\t(CAJA " + x + ") ")
+            f.write("(CAJA " + x + ") ")
         f.write("\n")
-
+        f.write("\t")
         for x in content_types:
-            f.write("\t(CONTENIDO " + x + ") ")
+            f.write("(CONTENIDO " + x + ") ")
         f.write("\n")
-
+        f.write("\t")
         for x in person:
-            f.write("\t(PERSONA " + x + ") ")
+            f.write("(PERSONA " + x + ") ")
         f.write("\n")
-
+        f.write("\t")
         for x in carrier:
-            f.write("\t(BRAZO " + x + ") ")
+            f.write("(BRAZO " + x + ") ")
         f.write("\n")
         
 
@@ -305,6 +305,8 @@ def main():
             f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
         for c in carrier:
             f.write("\t(libre "+ c + ")\n")
+        for b in crate:
+            f.write("\t(caja-libre "+ b + ")\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):
