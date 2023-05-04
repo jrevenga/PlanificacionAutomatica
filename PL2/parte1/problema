@@ -1,0 +1,30 @@
+(defproblem problem dron
+
+	(
+	(DRON dron1) 
+	(LOCATION deposito) 	(LOCATION l1) 	(LOCATION l2) 	(LOCATION l3) 
+	(CAJA c1) 	(CAJA c2) 	(CAJA c3) 
+	(CONTENIDO comida) 	(CONTENIDO medicina) 
+	(PERSONA p1) 	(PERSONA p2) 	(PERSONA p3) 
+	(BRAZO brazo1) 	(BRAZO brazo2) 
+	(esta-dron dron1 deposito)
+	(esta-caja c1 deposito)
+	(esta-caja c2 deposito)
+	(esta-caja c3 deposito)
+	(esta-persona p1 l1)
+	(esta-persona p2 l3)
+	(esta-persona p3 l3)
+	(almacena c1 medicina)
+	(almacena c2 comida)
+	(almacena c3 medicina)
+	(libre brazo1)
+	(libre brazo2)
+	(necesita p1 comida)
+	(necesita p2 comida)
+	(necesita p2 medicina)
+	)
+
+	(
+	(enviar-todo)
+	)
+)
