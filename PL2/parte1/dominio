@@ -1,54 +1,83 @@
-(defdomain dron (
+( defdomain dron (
 
     (:operator (!volar ?d ?f ?t)
-        ((DRON ?d) (LOCATION ?f) (LOCATION ?t) (esta-dron ?d ?f))
-        ((esta-dron ?d ?f))
-        ((esta-dron ?d ?t))
+
+        ((DRON ?d) (LOCATION ?f) (LOCATION ?t) (esta-dron ?d ?f)) ; preconditions
+        ((esta-dron ?d ?f)) ; delete
+        ((esta-dron ?d ?t)) ; add
+
     )
     
-    (:operator (!coger ?d ?b ?c ?l ?con)
-        ((DRON ?d) (BRAZO ?b) (CAJA ?c) (LOCATION ?l) (CONTENIDO ?con)
+    (:operator (!coger ?d ?c ?n ?l)
+
+        ( ; preconditions
+            (DRON ?d) (CAJA ?c) (CONTENIDO ?n) (LOCATION ?l)
             (esta-dron ?d ?l)
             (esta-caja ?c ?l)
-            (libre ?b)
-            (almacena ?c ?con)
-            (caja-libre ?c))
-        ((esta-caja ?c ?l)
-            (libre ?b))
-        ((lleva ?d ?c ?b))
+            (dron-libre ?d)
+            (almacena ?c ?n)
+        ) 
+        ( ; delete
+            (dron-libre ?d)
+            (esta-caja ?c ?l)
+        ) 
+        ( ; add
+            (lleva ?d ?c)
+        )
     )
     
-    (:operator (!soltar ?d ?b ?c ?l ?p ?con)
-        ((DRON ?d) (BRAZO ?b) (CAJA ?c) (LOCATION ?l) (PERSONA ?p) (CONTENIDO ?con)
+    (:operator (!soltar ?d ?c ?n ?l ?p)
+
+        ( ; preconditions
+            (DRON ?d) (CAJA ?c) (CONTENIDO ?n) (LOCATION ?l) (PERSONA ?p)
             (esta-dron ?d ?l)
-            (lleva ?d ?c ?b)
+            (lleva ?d ?c)
             (esta-persona ?p ?l)
-            (almacena ?c ?con))
-        ((lleva ?d ?c ?b)
-            (caja-libre c?)
-            (necesita ?p ?con))
-        ((libre ?b)
-            (esta-caja ?c ?l))
+            (almacena ?c ?n)
+        ) 
+        ( ; delete
+            (lleva ?d ?c)
+            (necesita ?p ?n)
+        ) 
+        ( ; add
+            (dron-libre ?d)
+            (esta-caja ?c ?l)
+        )
+
     )
 
-    (:method (enviar ?p ?con)
-        ((esta-caja ?c ?f)
-            (esta-persona ?p ?t)
-            (libre ?b)
-            (caja-libre c?)
-            (esta-dron ?d ?f)
-            (almacena ?c ?con))
-        ((!coger ?d ?b ?c ?f ?con)
-            (!volar ?d ?f ?t)
-            (!soltar ?d ?b ?c ?t ?p ?con)
-            (!volar ?d ?t ?f))
+    ; HACER ENVIAR PAQUETE
+    (:method (enviar ?p ?n)
+
+        ( ; preconditions 
+            (esta-caja ?c ?from)
+            (esta-persona ?p ?to)
+            (dron-libre ?d)
+            (esta-dron ?d ?from)
+            (almacena ?c ?n)
+        )
+        ( ; subtasks
+            (!coger ?d ?c ?n ?from)
+            (!volar ?d ?from ?to)
+            (!soltar ?d ?c ?n ?to ?p)
+            (!volar ?d ?to ?from)
+        )
+
     )
 
     (:method (enviar-todo)
-        ((necesita ?p ?con))
-        ((enviar ?p ?con) (enviar-todo))
-        ()
-        ()
+
+        ( ; preconditions
+            (necesita ?p ?n)
+        )
+        ( ; subtasks
+            (enviar ?p ?n) (enviar-todo)
+        )
+
+        () ; preconditions
+        () ; efect
+
+
     )
-)
-)
+
+))

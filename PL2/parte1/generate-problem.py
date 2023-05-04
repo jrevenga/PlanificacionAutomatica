@@ -297,6 +297,7 @@ def main():
 
         for d in drone:
             f.write("\t(esta-dron "+ d + " deposito)\n")
+            f.write("\t(dron-libre "+ d + ")\n")
         for b in crate:
             f.write("\t(esta-caja "+ b + " deposito)\n")
         for p in person:
@@ -305,8 +306,6 @@ def main():
             f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
         for c in carrier:
             f.write("\t(libre "+ c + ")\n")
-        for b in crate:
-            f.write("\t(caja-libre "+ b + ")\n")
 
         for x in range(options.persons):
             for y in range(len(content_types)):
