@@ -297,7 +297,6 @@ def main():
 
         for d in drone:
             f.write("\t(esta-dron "+ d + " deposito)\n")
-            f.write("\t(dron-libre "+ d + ")\n")
         for b in crate:
             f.write("\t(esta-caja "+ b + " deposito)\n")
         for p in person:
