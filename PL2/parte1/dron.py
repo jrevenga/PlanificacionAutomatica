@@ -1,7 +1,7 @@
 from pyhop import hop
 
 # Operadores
-def volar(state, d, f, t):
+def volar(state,d,f,t):
     if state.esta_dron[d] == f:
         state.esta_dron[d] = t
         return state
@@ -16,7 +16,7 @@ def coger(state,d,c,b):
     else: return False
 
 def soltar(state,d,c,p,b):
-    if state.esta_dron[d] == state.esta_persona[p] and state.esta_caja[c] == d and state.necesita[p] == state.almacena[c]:
+    if state.esta_dron[d] == state.esta_persona[p] and state.esta_caja[c] == d and state.necesita[p] == state.almacena[c] and state.libre[b]:
         state.esta_caja[c] = p
         state.lleva[d] = False
         del state.necesita[p]
