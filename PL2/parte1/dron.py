@@ -7,19 +7,21 @@ def volar(state, d, f, t):
         return state
     else: return False
 
-def coger(state,d,c):
-    if state.esta_dron[d] == state.esta_caja[c] and state.lleva[d] == False:
+def coger(state,d,c,b):
+    if state.esta_dron[d] == state.esta_caja[c] and state.lleva[d] == False and state.libre[b]:
+        state.libre[b] = False
         state.esta_caja[c] = d
         state.lleva[d] = True
         return state
     else: return False
 
-def soltar(state,d,c,p):
+def soltar(state,d,c,p,b):
     if state.esta_dron[d] == state.esta_persona[p] and state.esta_caja[c] == d and state.necesita[p] == state.almacena[c]:
         state.esta_caja[c] = p
         state.lleva[d] = False
         del state.necesita[p]
         del state.almacena[c]
+        state.libre[b] = True
         return state
     else: return False
 
@@ -47,10 +49,13 @@ hop.declare_operators(volar, coger, soltar)
 hop.declare_methods('h', enviar)
 
 state1 = hop.State('state1')
-state1.loc = {'dron1':'deposito','c1':'deposito','c2':'deposito','p1':'l1','p2':'l2'}
-state1.content = {'c1':'medicina','c2':'comida'}
-state1.need = {'p1':'medicina','p2':'comida'}
-state1.carry = {'dron1':False}
+state1.libre = {'brazo1' : True, 'brazo2' : True}
+state1.esta_dron = {'dron1':'deposito'}
+state1.esta_caja = {'c1': 'deposito','c2': 'deposito','c3': 'deposito','c4': 'deposito','c5': 'deposito'}
+state1.esta_persona = {'p1' : 'l1','p2' : 'l2','p3' : 'l3','p4' : 'l4','p5' : 'l5'}
+state1.almacena = {'c1' :'medicina','c2' : 'comida','c3' : 'comida','c4' : 'comida','c5' : 'medicina'}
+state1.necesita = {'p1' : 'comida','p2' : 'comida','p3' : 'medicina','p4' : 'medicina','p5' : 'comida'}
+state1.lleva = {'dron1':False}
 
 hop.plan(state1,
          [('h')],
