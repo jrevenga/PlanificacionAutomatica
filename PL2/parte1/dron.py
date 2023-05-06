@@ -7,39 +7,43 @@ def volar(state,d,f,t):
         return state
     else: return False
 
-def coger(state,d,c):
-    if state.loc[d] == state.loc[c] and state.carry[d] == False:
+def coger(state,d,c,b):
+    if state.loc[d] == state.loc[c] and state.carry[d] == False and state.libre[b] == True:
         state.loc[c] = d
         state.carry[d] = True
+        state.carry[b] = False
         return state
     else: return False
 
-def soltar(state,d,c,p):
+def soltar(state,d,c,p,b):
     if state.loc[d] == state.loc[p] and state.loc[c] == d and state.necesita[p] == state.almacena[c]:
         state.loc[c] = p
         state.carry[d] = False
         del state.necesita[p]
         del state.almacena[c]
+        state.carry[b] = True
         return state
     else: return False
 
 def enviar(state):
     lista_cajas = list(state.almacena.keys())
     d = list(state.carry.keys())[0]
+    brazos = list(state.libre.keys())
     if len(lista_cajas) > 0:
         persona = list(state.necesita.keys())[0]
         for i in lista_cajas:
-            if state.loc[d] == state.loc[i] and state.almacena[i] == state.necesita[persona]:
-                return [('coger',d,i),
-                ('volar',d,state.loc[d],state.loc[persona]),
-                ('soltar',d,i,persona),
-                ('h')]
-            elif state.almacena[i] == state.necesita[persona]:
-                return [('volar',d,state.loc[d],state.loc[i]),
-                ('coger',d,i),
-                ('volar',d,state.loc[i],state.loc[persona]),
-                ('soltar',d,i,persona),
-                ('h')]
+            for b in brazos:
+                if state.loc[d] == state.loc[i] and state.almacena[i] == state.necesita[persona]:
+                    return [('coger',d,i,b),
+                    ('volar',d,state.loc[d],state.loc[persona]),
+                    ('soltar',d,i,persona,b),
+                    ('h')]
+                elif state.almacena[i] == state.necesita[persona]:
+                    return [('volar',d,state.loc[d],state.loc[i]),
+                    ('coger',d,i,b),
+                    ('volar',d,state.loc[i],state.loc[persona]),
+                    ('soltar',d,i,persona,b),
+                    ('h')]
     else:
         return []
 
@@ -53,7 +57,7 @@ state1.loc = {'dron1':'deposito',
 state1.almacena = {'c1' :'medicina','c2' : 'comida','c3' : 'comida','c4' : 'comida','c5' : 'medicina'}
 state1.necesita = {'p1' : 'comida','p2' : 'comida','p3' : 'medicina','p4' : 'medicina','p5' : 'comida'}
 state1.carry = {'dron1':False}
-#state1.libre = {'brazo1' : True, 'brazo2' : True}
+state1.libre = {'brazo1' : True, 'brazo2' : True}
 
 hop.plan(state1,
          [('h')],
