@@ -301,19 +301,16 @@ def main():
             f.write("\t(esta-caja "+ b + " deposito)\n")
         for p in person:
             f.write("\t(esta-persona "+ p + " " + random.choice(location[1:])+")\n")
+        x=0
         for b in crate:
-            f.write("\t(almacena "+ b + " " + random.choice(content_types)+")\n")
+            f.write("\t(almacena "+ b + " " + content_types[x%2]+")\n")
+            x+=1
         for c in carrier:
             f.write("\t(libre "+ c + ")\n")
-
-        for x in range(options.persons):
-            for y in range(len(content_types)):
-                if need[x][y]:
-                    person_name = person[x]
-                    content_name = content_types[y]
-                    # TODO: write a goal that the person needs a crate
-                    # with this specific content
-                    f.write("\t(necesita "+ person_name + " " + content_name+")\n")
+        x=0
+        for p in person:
+            f.write("\t(necesita "+ p + " " + content_types[x%2]+")\n")
+            x+=1
 
         f.write("\t)\n\n")
 
