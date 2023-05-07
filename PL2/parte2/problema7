@@ -1,0 +1,19 @@
+(defproblem problem dron
+
+	(
+	(DRON dron1) 
+	(LOCATION deposito) (LOCATION l1) (LOCATION l2) 
+	(TRANSPORTADOR trans1) 
+	(CAPACIDAD trans1 150) 
+	
+	(esta-dron dron1 deposito)
+	(libre dron1)
+	(esta-trans trans1 deposito)
+	(necesita l1 50)
+	(necesita l2 100)
+	)
+
+	(
+	(enviar-todo)
+	)
+)

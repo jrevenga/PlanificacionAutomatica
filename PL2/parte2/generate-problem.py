@@ -77,15 +77,13 @@ def main():
             cap = input("Introduce la capacidad del transportador "+x+": ")
             f.write("(CAPACIDAD " + x + " "+cap+") ")
         
-        f.write("\n\t(COSTE cost)\n")
-        
+        f.write("\n\t\n")
 
         ######################################################################
         # Generate an initial state
 
         # TODO: Initialize all facts here!
 
-        f.write("\t(travel-cost cost 0)\n")
         for d in drone:
             f.write("\t(esta-dron "+ d + " deposito)\n")
             f.write("\t(libre "+ d + ")\n")
