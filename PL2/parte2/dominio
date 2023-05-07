@@ -1,0 +1,89 @@
+( defdomain dron (
+
+    (:operator (!volar ?d ?f ?t)
+        ((DRON ?d) (LOCATION ?f) (LOCATION ?t) 
+            (esta-dron ?d ?f))
+        ((esta-dron ?d ?f))
+        ((esta-dron ?d ?t))
+        50
+    )
+    
+    (:operator (!coger ?d ?l)
+        ((DRON ?d) (LOCATION ?l)
+            (esta-dron ?d ?l)
+            (libre ?d))
+        ((libre ?b))
+        ()
+        0
+    )
+
+    (:operator (!soltar ?d ?l ?n)
+        ((DRON ?d) (LOCATION ?l)
+            (esta-dron ?d ?l)
+            (necesita ?l ?n)) 
+        ((necesita ?l ?n)) 
+        ((libre ?d)
+            (necesita ?l (call - ?n 1)))
+        1
+    )
+
+    (:operator (!volar-trans ?d ?r ?f ?t)
+        ((DRON ?d) (TRANSPORTADOR ?r) (LOCATION ?f) (LOCATION ?t)
+            (esta-dron ?d ?f)
+            (esta-trans ?r ?f))
+        ((esta-dron ?d ?f)
+            (esta-trans ?r ?f))
+        ((esta-dron ?d ?t)
+            (esta-trans ?r ?t))
+        50
+    )
+
+    (:operator (!meter-caja-trans ?d ?r ?l)
+        ((DRONE ?d) (TRANSPORTADOR ?r) (LOCATION ?l)
+            (esta-dron ?d ?l)
+            (esta-trans ?r ?l)
+            (libre ?d)) 
+        ()
+        ()
+        0
+    )
+
+    (:operator (!sacar-caja-trans ?d ?r ?l ?n ?c)
+        ((DRONE ?d) (TRANSPORTADOR ?r) (LOCATION ?l) (CAPACIDAD ?r ?c)
+            (esta-dron ?d ?l)
+            (esta-trans ?r ?l)
+            (necesita ?l ?n))
+        ((necesita ?l ?n))
+        ((necesita ?l (call - ?n ?c)))
+        ?c
+    )
+
+    (:method (enviar ?to ?n)
+        ((DRON ?d)
+            (esta-dron ?d ?from)
+            (call = ?n 1))        
+        ((!coger ?d ?from)
+            (!volar ?d ?from ?to)
+            (!soltar ?d ?to ?n)
+            (!volar ?d ?to ?from))
+            
+        ((DRON ?d) (CAPACIDAD ?r ?c)
+            (esta-dron ?d ?from)
+            (esta-trans ?r ?from)
+            (call > ?n 1))
+        ((!meter-caja-trans ?d ?r ?from)
+            (!volar-trans ?d ?r ?from ?to)
+            (!sacar-caja-trans ?d ?r ?to ?n ?c)
+            (!volar-trans ?d ?r ?to ?from))
+    )
+
+    (:method (enviar-todo)
+        ((necesita ?l ?n)
+            (call > ?n 0))
+        ((enviar ?l ?n) (enviar-todo)
+        )
+        ()
+        ()
+    )
+
+))
