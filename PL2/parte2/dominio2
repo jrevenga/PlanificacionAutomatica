@@ -77,7 +77,7 @@
             (!sacar-caja-trans ?d ?r ?to ?n ?c)
             (!volar-trans ?d ?r ?to ?from))
         
-        (:sort-by ?c > (and (DRONE ?d) (CAPACITY ?r ?c)
+        (:sort-by ?c > (and (DRON ?d) (CAPACIDAD ?r ?c)
             (esta-dron ?d ?from)
             (esta-trans ?r ?from)
             (call > ?n 1)))
@@ -87,22 +87,8 @@
             (!volar-trans ?d ?r ?to ?from))
     )
 
-    (:method (send-all-boxes) ; enviar-todo
-
-        ( ; preconditions
-            :sort-by ?n > (and (loc-needs ?l ?n) (call > ?n 0))
-        )
-        ( ; subtasks
-            (send-box ?l ?n) (send-all-boxes)
-        )
-
-        () ; preconditions
-        () ; subtasks
-
-    )
-
     (:method (enviar-todo)
-        (sort-by ?n > (and 
+        (:sort-by ?n > (and 
             (necesita ?l ?n)
             (call > ?n 0)))
         ((enviar ?l ?n) (enviar-todo))
